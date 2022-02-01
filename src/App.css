@@ -144,6 +144,10 @@
   border-radius: 8px;
 }
 
+.green {
+  background-color: green;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

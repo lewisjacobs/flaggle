@@ -13,6 +13,8 @@ function App() {
   const [eighthInvis, setEightInvis] = useState(false);
   const [ninthInvis, setNinthInvis] = useState(false);
 
+  const [answer, setAnswer] = useState("");
+
   return (
     <div className="App">
       <header className="App-header">
@@ -28,7 +30,7 @@ function App() {
           <div className={`eighth-panel ${eighthInvis ? "invisible" : ""}`} onClick={() => setEightInvis(true)}/>
           <div className={`ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => setNinthInvis(true)}/>
         </div>
-        <input type="text" className='country'/>
+        <input value={answer} type="text" className={`country ${answer.toLowerCase() === "england" ? "green" : ""}`} onChange={(e) => setAnswer(e.target.value)}/>
       </header>
     </div>
   );
