@@ -19,11 +19,13 @@ function App() {
   const [canReveal, setCanReveal] = useState(true);
   const [total, setTotal] = useState(0);
 
+  const rightAnswer = "oman";
+
   return (
     <div className="App">
       <header className="App-header">
         <div className='grid'>
-          <img src="https://flagcdn.com/w2560/gb-eng.png" className='flag'/>
+          <img src="https://flagcdn.com/w320/om.png" className='flag'/>
           <div className='panels'>
             <div className={`first-panel ${firstInvis ? "invisible" : ""}`} onClick={() => { if(canReveal) setFirstInvis(true); setCanReveal(false); }}/>
             <div className={`second-panel ${secondInvis ? "invisible" : ""}`} onClick={() => { if(canReveal) setSecondInvis(true); setCanReveal(false); }}/>
@@ -44,7 +46,7 @@ function App() {
           } 
           else {
 
-            if(guess.toLowerCase() === "england") {
+            if(guess.toLowerCase() === rightAnswer) {
               setTotal(firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis);
               setFirstInvis(true);
               setSecondInvis(true);
@@ -70,7 +72,7 @@ function App() {
         </button>
         <div className='guesses'>
         {
-          guesses.map(g => <div>{g} {g.toLowerCase() === "england" ? "✔️" : "❌"}</div>)
+          guesses.map(g => <div>{g} {g.toLowerCase() === rightAnswer ? "✔️" : "❌"}</div>)
         }
         </div>
       </header>
