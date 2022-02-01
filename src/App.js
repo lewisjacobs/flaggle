@@ -20,20 +20,22 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="https://flagcdn.com/w2560/gb-eng.png" className='flag'/>
         <div className='grid'>
-          <div className={`first-panel ${firstInvis ? "invisible" : ""}`} onClick={() => setFirstInvis(true)}/>
-          <div className={`second-panel ${secondInvis ? "invisible" : ""}`} onClick={() => setSecondInvis(true)}/>
-          <div className={`third-panel ${thirdInvis ? "invisible" : ""}`} onClick={() => setThirdInvis(true)}/>
-          <div className={`fourth-panel ${fourthInvis ? "invisible" : ""}`} onClick={() => setFourthInvis(true)}/>
-          <div className={`fifth-panel ${fifthInvis ? "invisible" : ""}`} onClick={() => setFifthInvis(true)}/>
-          <div className={`sixth-panel ${sixthInvis ? "invisible" : ""}`} onClick={() => setSixthInvis(true)}/>
-          <div className={`seventh-panel ${seventhInvis ? "invisible" : ""}`} onClick={() => setSeventhInvis(true)}/>
-          <div className={`eighth-panel ${eighthInvis ? "invisible" : ""}`} onClick={() => setEightInvis(true)}/>
-          <div className={`ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => setNinthInvis(true)}/>
+          <img src="https://flagcdn.com/w2560/gb-eng.png" className='flag'/>
+          <div className='panels'>
+            <div className={`first-panel ${firstInvis ? "invisible" : ""}`} onClick={() => setFirstInvis(true)}/>
+            <div className={`second-panel ${secondInvis ? "invisible" : ""}`} onClick={() => setSecondInvis(true)}/>
+            <div className={`third-panel ${thirdInvis ? "invisible" : ""}`} onClick={() => setThirdInvis(true)}/>
+            <div className={`fourth-panel ${fourthInvis ? "invisible" : ""}`} onClick={() => setFourthInvis(true)}/>
+            <div className={`fifth-panel ${fifthInvis ? "invisible" : ""}`} onClick={() => setFifthInvis(true)}/>
+            <div className={`sixth-panel ${sixthInvis ? "invisible" : ""}`} onClick={() => setSixthInvis(true)}/>
+            <div className={`seventh-panel ${seventhInvis ? "invisible" : ""}`} onClick={() => setSeventhInvis(true)}/>
+            <div className={`eighth-panel ${eighthInvis ? "invisible" : ""}`} onClick={() => setEightInvis(true)}/>
+            <div className={`ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => setNinthInvis(true)}/>
+          </div>
         </div>
-        <input value={guess} type="text" className="country" onChange={(e) => setGuess(e.target.value)}/>
-        <button disabled={correct} onClick={() => {
+        <input value={guess} type="text" className="country" disabled={correct} onChange={(e) => setGuess(e.target.value)}/>
+        <button className='submit' disabled={correct || guess === ""} onClick={() => {
 
           if(guess.toLowerCase() === "england") setCorrect(true)
 
@@ -47,7 +49,7 @@ function App() {
         </button>
         <div className='guesses'>
         {
-          guesses.map(g => <div>{g}{g.toLowerCase() === "england" ? "✔️" : "❌"}</div>)
+          guesses.map(g => <div>{g} {g.toLowerCase() === "england" ? "✔️" : "❌"}</div>)
         }
         </div>
       </header>
