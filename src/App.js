@@ -13,7 +13,9 @@ function App() {
   const [eighthInvis, setEightInvis] = useState(false);
   const [ninthInvis, setNinthInvis] = useState(false);
 
-  const [answer, setAnswer] = useState("");
+  const [guess, setGuess] = useState("");
+  const [correct, setCorrect] = useState("");
+  const [guesses, setGuesses] = useState([]);
 
   return (
     <div className="App">
@@ -30,7 +32,24 @@ function App() {
           <div className={`eighth-panel ${eighthInvis ? "invisible" : ""}`} onClick={() => setEightInvis(true)}/>
           <div className={`ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => setNinthInvis(true)}/>
         </div>
-        <input value={answer} type="text" className={`country ${answer.toLowerCase() === "england" ? "green" : ""}`} onChange={(e) => setAnswer(e.target.value)}/>
+        <input value={guess} type="text" className="country" onChange={(e) => setGuess(e.target.value)}/>
+        <button disabled={correct} onClick={() => {
+
+          if(guess.toLowerCase() === "england") setCorrect(true)
+
+          let newGuesses = guesses;
+          newGuesses.push(guess);
+        
+          setGuesses(newGuesses)
+          setGuess("")
+        }}>
+          Submit
+        </button>
+        <div className='guesses'>
+        {
+          guesses.map(g => <div>{g}{g.toLowerCase() === "england" ? "✔️" : "❌"}</div>)
+        }
+        </div>
       </header>
     </div>
   );
