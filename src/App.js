@@ -37,10 +37,10 @@ function App() {
           </div>
         </div>
         <input value={guess} type="text" className="country" disabled={correct || canReveal} onChange={(e) => setGuess(e.target.value)}/>
-        <button className='submit' onClick={() => {
+        <button className='submit' disabled={canReveal} onClick={() => {
 
           if(correct) {
-            navigator.clipboard.writeText("GeoGrid 1 " + total + "/9 " + "🟥".repeat(total) + "🟩".repeat(9-total));
+            navigator.clipboard.writeText("GeoGrid 1 " + total + "/9 " + "🟥".repeat(total) + "✅".repeat(9-total));
           } 
           else {
 
