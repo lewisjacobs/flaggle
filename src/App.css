@@ -28,6 +28,122 @@
   color: #61dafb;
 }
 
+.flag {
+  top: 0;
+  margin-top: 100px;
+  position: absolute;
+  width: 360px;
+  height: 270px;
+}
+
+.grid {
+  top: 0;
+  margin-top: 100px;
+  position: absolute;
+  width: 360px;
+  cursor: pointer;
+}
+
+.first-panel {
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.second-panel {
+  margin-left: 120px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.third-panel {
+  margin-left: 240px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.fourth-panel {
+  margin-top: 90px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.fifth-panel {
+  margin-top: 90px;
+  margin-left: 120px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.sixth-panel {
+  margin-top: 90px;
+  margin-left: 240px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.seventh-panel {
+  margin-top: 180px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.eighth-panel {
+  margin-top: 180px;
+  margin-left: 120px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.ninth-panel {
+  margin-top: 180px;
+  margin-left: 240px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.country {
+  top: 0;
+  margin-top: 400px;
+  position: absolute;
+  padding: 10px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  width: 340px;
+  border-radius: 8px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
