@@ -36,7 +36,7 @@ function App() {
             <div className={`ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal) setNinthInvis(true); setCanReveal(false); }}/>
           </div>
         </div>
-        <input value={guess} type="text" className="country" disabled={correct} onChange={(e) => setGuess(e.target.value)}/>
+        <input value={guess} type="text" className="country" disabled={correct || canReveal} onChange={(e) => setGuess(e.target.value)}/>
         <button className='submit' onClick={() => {
 
           if(correct) {
