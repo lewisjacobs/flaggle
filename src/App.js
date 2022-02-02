@@ -44,7 +44,7 @@ function App() {
         <button className='submit' disabled={canReveal && !correct} onClick={() => {
 
           if(correct) {
-            navigator.clipboard.writeText(`GeoGrid ${dayNumber} ` + total + "/9 " + "🟥".repeat(total) + "✅".repeat(9-total));
+            navigator.clipboard.writeText(`GeoTile ${dayNumber} ` + total + "/9 " + "🟥".repeat(total) + "✅".repeat(9-total));
           } 
           else {
 
@@ -75,6 +75,10 @@ function App() {
         <div className='guesses'>
         {
           guesses.map(g => <div>{g} {g.toLowerCase() === rightAnswer ? "✔️" : "❌"}</div>)
+        }
+        {
+          (firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis) === 9 ?
+          <div>The answer was {rightAnswer}!</div> : null
         }
         </div>
       </header>
