@@ -70,14 +70,14 @@ function App() {
             setCanReveal(true)
           }
         }}>
-          {correct ? "Share" : "Submit"}
+          {correct ? "Share" : guess === "" ? "Skip guess" : "Submit"}
         </button>
         <div className='guesses'>
         {
           guesses.map(g => <div>{g} {g.toLowerCase() === rightAnswer ? "✔️" : "❌"}</div>)
         }
         {
-          (firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis) === 9 ?
+          ((firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis) === 9) && canReveal && !correct?
           <div>The answer was {rightAnswer}!</div> : null
         }
         </div>
