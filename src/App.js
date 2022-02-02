@@ -21,6 +21,7 @@ function App() {
 
   const rightAnswer = "netherlands";
   const flagName = "nl";
+  const dayNumber = 2;
 
   return (
     <div className="App">
@@ -43,7 +44,7 @@ function App() {
         <button className='submit' disabled={canReveal && !correct} onClick={() => {
 
           if(correct) {
-            navigator.clipboard.writeText("GeoGrid 1 " + total + "/9 " + "🟥".repeat(total) + "✅".repeat(9-total));
+            navigator.clipboard.writeText(`GeoGrid ${dayNumber} ` + total + "/9 " + "🟥".repeat(total) + "✅".repeat(9-total));
           } 
           else {
 
