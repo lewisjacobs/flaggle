@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.title {
+  top: 0;
+  margin-top: 30px;
+  position: absolute;
+}
+
 .grid {
   top: 0;
   margin-top: 100px;
@@ -151,13 +157,27 @@
 
 .submit {
   top: 0;
-  margin-top: 460px;
+  margin-top: 465px;
   position: absolute;
+  color: white;
+  background-color: #6495ed;
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 8px 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 .guesses {
   top: 0;
-  margin-top: 500px;
+  margin-top: 510px;
   position: absolute;
 }
 

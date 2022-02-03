@@ -19,13 +19,53 @@ function App() {
   const [canReveal, setCanReveal] = useState(true);
   const [total, setTotal] = useState(0);
 
-  const rightAnswer = "netherlands";
-  const flagName = "nl";
-  const dayNumber = 2;
+  const next = [
+    {
+      rightAnswer: "oman",
+      flagName: "om"
+    },
+    {
+      rightAnswer: "netherlands",
+      flagName: "nl"
+    },
+    {
+      rightAnswer: "south africa",
+      flagName: "za"
+    },
+    {
+      rightAnswer: "china",
+      flagName: "cn"
+    },
+    {
+      rightAnswer: "lithuania",
+      flagName: "lt"
+    },
+    {
+      rightAnswer: "russia",
+      flagName: "ru"
+    },
+    {
+      rightAnswer: "uruguay",
+      flagName: "uy"
+    },
+    {
+      rightAnswer: "portugal",
+      flagName: "pt"
+    },
+    {
+      rightAnswer: "iceland",
+      flagName: "is"
+    }
+  ];
+
+  const dayNumber = new Date().getDate();
+  const rightAnswer = next[dayNumber - 1].rightAnswer;
+  const flagName = next[dayNumber - 1].flagName;
 
   return (
     <div className="App">
       <header className="App-header">
+        <div className='title'>GeoTile #{dayNumber}</div>
         <div className='grid'>
           <img src={`https://flagcdn.com/w320/${flagName}.png`} className='flag'/>
           <div className='panels'>
@@ -41,10 +81,10 @@ function App() {
           </div>
         </div>
         <input value={guess} type="text" className="country" disabled={correct || canReveal} onChange={(e) => setGuess(e.target.value)}/>
-        <button className='submit' disabled={canReveal && !correct} onClick={() => {
+        <button className={`submit ${canReveal && !correct ? "disabled": ""}`} disabled={canReveal && !correct} onClick={() => {
 
           if(correct) {
-            navigator.clipboard.writeText(`GeoTile ${dayNumber} ` + total + "/9 " + "🟥".repeat(total) + "✅".repeat(9-total));
+            navigator.clipboard.writeText(`GeoTile #${dayNumber} ` + total + "/9 " + "🟥".repeat(total) + "🟩".repeat(9-total) + " https://lewisjacobs.github.io/geogrid");
           } 
           else {
 
@@ -74,7 +114,7 @@ function App() {
         </button>
         <div className='guesses'>
         {
-          guesses.map(g => <div>{g} {g.toLowerCase() === rightAnswer ? "✔️" : "❌"}</div>)
+          guesses.map(g => <div key={g}>{g} {g.toLowerCase() === rightAnswer ? "✅" : "❌"}</div>)
         }
         {
           ((firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis) === 9) && canReveal && !correct?
