@@ -62,6 +62,11 @@ function App() {
   const rightAnswer = next[dayNumber - 1].rightAnswer;
   const flagName = next[dayNumber - 1].flagName;
 
+  const shareText =
+      `GeoTile #${dayNumber} ${total}/9\r\n` +
+      `${ correct ? "❌".repeat(total-1) + "✅" : "❌".repeat(total) }${"⬛".repeat(9-total)}\r\n` +
+      `https://lewisjacobs.github.io/geogrid`;
+
   return (
     <div className="App">
       <header className="App-header">
@@ -83,9 +88,7 @@ function App() {
         <input value={guess} type="text" className="country" disabled={correct || canReveal} onChange={(e) => setGuess(e.target.value)}/>
         <button className={`submit ${canReveal && !correct ? "disabled": ""}`} disabled={canReveal && !correct} onClick={() => {
 
-          if(correct) {
-            navigator.clipboard.writeText(`GeoTile #${dayNumber} ` + total + "/9 " + "🟥".repeat(total) + "🟩".repeat(9-total) + " https://lewisjacobs.github.io/geogrid");
-          } 
+          if(correct) navigator.clipboard.writeText(shareText);
           else {
 
             if(guess.toLowerCase() === rightAnswer) {
