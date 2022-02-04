@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import GeoTile from './pages/GeoTile';
-import { BrowserRouter, Routes , Route } from "react-router-dom";
+import { HashRouter, Routes , Route } from "react-router-dom";
 import WhosThatPokemon from './pages/WhosThatPokemon';
 
 function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
         <div className="App">
           <header className="App-header">
           <Routes >
@@ -17,7 +17,7 @@ function App() {
           </Routes > 
         </header>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
