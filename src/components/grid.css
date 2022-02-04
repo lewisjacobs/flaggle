@@ -1,0 +1,179 @@
+.title {
+  top: 0;
+  margin-top: 30px;
+  position: absolute;
+}
+
+.grid {
+  top: 0;
+  margin-top: 100px;
+  position: absolute;
+  width: 360px;
+  cursor: pointer;
+}
+
+.first-panel {
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.second-panel {
+  margin-left: 120px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.third-panel {
+  margin-left: 240px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.fourth-panel {
+  margin-top: 90px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.fifth-panel {
+  margin-top: 90px;
+  margin-left: 120px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.sixth-panel {
+  margin-top: 90px;
+  margin-left: 240px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.seventh-panel {
+  margin-top: 180px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.eighth-panel {
+  margin-top: 180px;
+  margin-left: 120px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.ninth-panel {
+  margin-top: 180px;
+  margin-left: 240px;
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.country {
+  top: 0;
+  margin-top: 400px;
+  position: absolute;
+  padding: 10px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  width: 340px;
+  border-radius: 8px;
+}
+
+.green {
+  background-color: green;
+}
+
+.submit {
+  top: 0;
+  margin-top: 465px;
+  position: absolute;
+  color: white;
+  background-color: #6495ed;
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 8px 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.guesses {
+  top: 0;
+  margin-top: 510px;
+  position: absolute;
+}
+
+.big-first-panel {
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.big-second-panel {
+  margin-left: 180px;
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.big-third-panel {
+  margin-top: 135px;
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.big-fourth-panel {
+  margin-left: 180px;
+  margin-top: 135px;
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
