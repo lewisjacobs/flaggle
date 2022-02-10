@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import GeoTile from './pages/GeoTile';
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import WhosThatPokemon from './pages/WhosThatPokemon';
 
 function App() {
 
   return (
-    <Switch >
-      <Route path="/pokemon" component={<WhosThatPokemon/>}/>
-      <Route exact path="/" component={<GeoTile/>}/>
-    </Switch > 
+    <Routes >
+      <Route path="/" element={<GeoTile/>}/>
+      <Route path="/pokemon" element={<WhosThatPokemon/>}/>
+    </Routes > 
   );
 }
 
