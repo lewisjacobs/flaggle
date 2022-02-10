@@ -40,6 +40,18 @@ function GeoTile() {
     {
       rightAnswer: "iceland",
       flagName: "is"
+    },
+    {
+      rightAnswer: "guatemala",
+      flagName: "gt"
+    },
+    {
+      rightAnswer: "wales",
+      flagName: "gb-wls"
+    },
+    {
+      rightAnswer: "canada",
+      flagName: "ca"
     }
   ];
 
@@ -49,7 +61,13 @@ function GeoTile() {
       
   const image = <img src={`https://flagcdn.com/w320/${flagName}.png`} alt="puzzle" className='flag'></img>
 
-  return <Grid title={"GeoTile"} rightAnswer={rightAnswer} image={image} dayNumber={dayNumber} gameUrl={"https://lewisjacobs.github.io/geogrid"} />;
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Grid title={"GeoTile"} rightAnswer={rightAnswer} image={image} dayNumber={dayNumber} gameUrl={"https://lewisjacobs.github.io/geogrid"} />
+      </header>
+    </div>
+  );
 }
 
 export default GeoTile;

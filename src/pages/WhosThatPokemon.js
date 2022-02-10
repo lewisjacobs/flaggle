@@ -12,7 +12,13 @@ function WhosThatPokemon() {
 
   const image = <div className='pokemon-container'><img src={`https://img.pokemondb.net/artwork/${pokemon[dayNumber]}.jpg`} alt="puzzle" className='pokemon'></img></div>
       
-  return <Grid title={"Who's That Pokemon"} rightAnswer={pokemon[dayNumber]} image={image} dayNumber={dayNumber + 1} gameUrl={"https://lewisjacobs.github.io/geogrid/whosthatpokemon"} easy />;
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Grid title={"Who's That Pokemon"} rightAnswer={pokemon[dayNumber]} image={image} dayNumber={dayNumber + 1} gameUrl={"https://lewisjacobs.github.io/geogrid/whosthatpokemon"} easy />
+      </header>
+    </div>
+  );
 }
 
 export default WhosThatPokemon;
