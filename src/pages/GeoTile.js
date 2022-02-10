@@ -58,6 +58,8 @@ function GeoTile() {
   const dayNumber = new Date().getDate();
   const rightAnswer = next[dayNumber - 1].rightAnswer;
   const flagName = next[dayNumber - 1].flagName;
+
+  console.log(dayNumber)
       
   const image = <img src={`https://flagcdn.com/w320/${flagName}.png`} alt="puzzle" className='flag'></img>
 
