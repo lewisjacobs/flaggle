@@ -52,6 +52,46 @@ function GeoTile() {
     {
       rightAnswer: "canada",
       flagName: "ca"
+    },
+    {
+      rightAnswer: "cambodia",
+      flagName: "kh"
+    },
+    {
+      rightAnswer: "costa rica",
+      flagName: "cr"
+    },
+    {
+      rightAnswer: "jersey",
+      flagName: "je"
+    },
+    {
+      rightAnswer: "thailand",
+      flagName: "th"
+    },
+    {
+      rightAnswer: "brazil",
+      flagName: "br"
+    },
+    {
+      rightAnswer: "denmark",
+      flagName: "dk"
+    },
+    {
+      rightAnswer: "ecuador",
+      flagName: "ec"
+    },
+    {
+      rightAnswer: "algeria",
+      flagName: "dz"
+    },
+    {
+      rightAnswer: "bahrain",
+      flagName: "bh"
+    },
+    {
+      rightAnswer: "colombia",
+      flagName: "co"
     }
   ];
 
