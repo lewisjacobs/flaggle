@@ -21,7 +21,7 @@ function GeoTile() {
     }
 
     setFlags(flags);
-    setFlag(flags[Answers[dayNumber]])
+    setFlag(flags[Answers[dayNumber - 1]])
   }
       
   const [flags, setFlags] = useState([]);
