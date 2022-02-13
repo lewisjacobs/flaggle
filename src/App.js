@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import GeoTile from './pages/GeoTile';
+import GeoTile from './pages/geotile/GeoTile';
 // import { Route, Routes } from "react-router-dom";
 // import WhosThatPokemon from './pages/WhosThatPokemon';
 
