@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './grid.css';
 
-function Grid({ title, rightAnswer, image, dayNumber, gameUrl, easy }) {
+function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy }) {
 
   const [firstInvis, setFirstInvis] = useState(false);
   const [secondInvis, setSecondInvis] = useState(false);
@@ -29,6 +29,7 @@ function Grid({ title, rightAnswer, image, dayNumber, gameUrl, easy }) {
   return (
       <>
         <div className='title'>{title} #{dayNumber}</div>
+        <div className='description'>{description}</div>
         <div className='grid'>
           {image}
           <div className='panels'>

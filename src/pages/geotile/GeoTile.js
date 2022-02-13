@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './geotile.css';
 import Grid from '../../components/Grid';
 import { Answers } from './answers';
-import { generatePath } from 'react-router-dom';
-import generate from './AnswerGenerator';
 
 function GeoTile() {
 
@@ -35,7 +33,7 @@ function GeoTile() {
     <div className="App">
       <header className="App-header">
         {
-          flag && <Grid title={"GeoTile"} rightAnswer={flag.country} image={<img src={`https://flagcdn.com/w320/${flag.code}.png`} alt="puzzle" className='flag'></img>} dayNumber={dayNumber} gameUrl={"https://lewisjacobs.github.io/geogrid"} />
+          flag && <Grid title={"GeoTile"} description={"Guess the flag!"} rightAnswer={flag.country} image={<img src={`https://flagcdn.com/w320/${flag.code}.png`} alt="puzzle" className='flag'></img>} dayNumber={dayNumber} gameUrl={"https://lewisjacobs.github.io/geogrid"} />
         }
       </header>
     </div>

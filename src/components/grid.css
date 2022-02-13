@@ -4,6 +4,13 @@
   position: absolute;
 }
 
+.description {
+  top: 0;
+  margin-top: 65px;
+  font-size: 16px;
+  position: absolute;
+}
+
 .grid {
   top: 0;
   margin-top: 100px;
