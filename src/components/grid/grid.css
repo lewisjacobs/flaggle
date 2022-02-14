@@ -14,8 +14,8 @@
 
 .grid {
   margin-top: 20px;
-  width: 360px;
-  height: 270px;
+  width: 300px;
+  height: 225px;
   cursor: pointer;
 }
 
@@ -25,7 +25,7 @@
   outline: none;
   font-size: 18px;
   font-weight: 500;
-  width: 340px;
+  width: 240px;
   border-radius: 8px;
   border: 2px solid #e9cfa6;
 }
@@ -41,7 +41,7 @@
   font-size: 18px;
   border-radius: 8px;
   padding: 8px;
-  width: 260px;
+  width: 220px;
   outline: none;
   border: none;
   cursor: pointer;
@@ -60,13 +60,12 @@
 
 .panel {
   position: absolute;
-  width: 120px;
-  height: 90px;
+  width: 100px;
+  height: 75px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   background-color: #474747;
-  border: 1px solid #4F4F4F;
 }
 
 .light {
@@ -82,42 +81,42 @@
 }
 
 .second-panel {
-  margin-left: 120px;
+  margin-left: 100px;
 }
 
 .third-panel {
   border-top-right-radius: 8px;
-  margin-left: 240px;
+  margin-left: 200px;
 }
 
 .fourth-panel {
-  margin-top: 90px;
+  margin-top: 75px;
 }
 
 .fifth-panel {
-  margin-top: 90px;
-  margin-left: 120px;
+  margin-top: 75px;
+  margin-left: 100px;
 }
 
 .sixth-panel {
-  margin-top: 90px;
-  margin-left: 240px;
+  margin-top: 75px;
+  margin-left: 200px;
 }
 
 .seventh-panel {
   border-bottom-left-radius: 8px;
-  margin-top: 180px;
+  margin-top: 150px;
 }
 
 .eighth-panel {
-  margin-top: 180px;
-  margin-left: 120px;
+  margin-top: 150px;
+  margin-left: 100px;
 }
 
 .ninth-panel {
   border-bottom-right-radius: 8px;
-  margin-top: 180px;
-  margin-left: 240px;
+  margin-top: 150px;
+  margin-left: 200px;
 }
 
 .invisible {
