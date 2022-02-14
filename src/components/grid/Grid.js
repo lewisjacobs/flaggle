@@ -61,7 +61,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
             navigator.clipboard.writeText(shareText);
           } else {
 
-            if(guess.toLowerCase() === rightAnswer) {
+            if(guess.toLowerCase().trim() === rightAnswer) {
               setTotal(firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis);
               setFirstInvis(true);
               setSecondInvis(true);
