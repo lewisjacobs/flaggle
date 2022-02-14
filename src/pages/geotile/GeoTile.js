@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './geotile.css';
-import Grid from '../../components/Grid';
+import Grid from '../../components/grid/Grid';
 import { Answers } from './answers';
+import Header from '../../components/header/Header';
 
 function GeoTile() {
 
@@ -30,14 +31,22 @@ function GeoTile() {
   }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {
-          flag && <Grid title={"GeoTile"} description={"Guess the flag!"} rightAnswer={flag.country} image={<img src={`https://flagcdn.com/w320/${flag.code}.png`} alt="puzzle" className='flag'></img>} dayNumber={dayNumber} gameUrl={"https://lewisjacobs.github.io/geogrid"} />
-        }
-      </header>
-    </div>
-  );
+    <>
+      <Header 
+          title={"GeoTile"}
+          dayNumber={dayNumber}  />
+      { flag && 
+        <Grid 
+          title={"GeoTile"} 
+          description={"Click to reveal tiles and guess the flag!"} 
+          rightAnswer={flag.country} 
+          image={<img src={`https://flagcdn.com/w320/${flag.code}.png`} alt="puzzle" className='flag'></img>} 
+          dayNumber={dayNumber} 
+          gameUrl={"https://lewisjacobs.github.io/geogrid"} 
+        /> 
+      }
+    </>
+    );
 }
 
 export default GeoTile;

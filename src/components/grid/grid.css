@@ -1,0 +1,161 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.description {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.grid {
+  margin-top: 20px;
+  width: 360px;
+  height: 270px;
+  cursor: pointer;
+}
+
+.country {
+  margin-top: 20px;
+  padding: 10px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  width: 340px;
+  border-radius: 8px;
+  border: 2px solid #e9cfa6;
+}
+
+.green {
+  background-color: green;
+}
+
+.submit {
+  margin-top: 20px;
+  color: #474747;
+  background-color: #e9cfa6;
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 8px;
+  width: 260px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.guesses {
+  margin-top: 10px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.panel {
+  position: absolute;
+  width: 120px;
+  height: 90px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  background-color: #474747;
+  border: 1px solid #4F4F4F;
+}
+
+.light {
+  background-color: #4F4F4F;
+}
+
+.dark {
+  background-color: #474747;
+}
+
+.first-panel {
+  border-top-left-radius: 8px;
+}
+
+.second-panel {
+  margin-left: 120px;
+}
+
+.third-panel {
+  border-top-right-radius: 8px;
+  margin-left: 240px;
+}
+
+.fourth-panel {
+  margin-top: 90px;
+}
+
+.fifth-panel {
+  margin-top: 90px;
+  margin-left: 120px;
+}
+
+.sixth-panel {
+  margin-top: 90px;
+  margin-left: 240px;
+}
+
+.seventh-panel {
+  border-bottom-left-radius: 8px;
+  margin-top: 180px;
+}
+
+.eighth-panel {
+  margin-top: 180px;
+  margin-left: 120px;
+}
+
+.ninth-panel {
+  border-bottom-right-radius: 8px;
+  margin-top: 180px;
+  margin-left: 240px;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.big-first-panel {
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.big-second-panel {
+  margin-left: 180px;
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.big-third-panel {
+  margin-top: 135px;
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}
+
+.big-fourth-panel {
+  margin-left: 180px;
+  margin-top: 135px;
+  position: absolute;
+  width: 180px;
+  height: 135px;
+  background-color: #282c34;
+  border: 1px solid white;
+}

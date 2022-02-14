@@ -27,8 +27,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
       `${gameUrl}`;
 
   return (
-      <>
-        <div className='title'>{title} #{dayNumber}</div>
+      <div className='game'>
         <div className='description'>{description}</div>
         <div className='grid'>
           {image}
@@ -36,26 +35,26 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
             { 
               easy ? 
               <>
-                <div className={`big-first-panel ${firstInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !firstInvis) { setFirstInvis(true); setCanReveal(false); }}}/>
-                <div className={`big-second-panel ${secondInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !secondInvis) { setSecondInvis(true); setCanReveal(false); }}}/>
-                <div className={`big-third-panel ${thirdInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !thirdInvis) { setThirdInvis(true); setCanReveal(false); }}}/>
-                <div className={`big-fourth-panel ${fourthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !fourthInvis) { setFourthInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel light big-first-panel ${firstInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !firstInvis) { setFirstInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel dark big-second-panel ${secondInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !secondInvis) { setSecondInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel light big-third-panel ${thirdInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !thirdInvis) { setThirdInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel dark big-fourth-panel ${fourthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !fourthInvis) { setFourthInvis(true); setCanReveal(false); }}}/>
               </>
               :
               <>
-                <div className={`first-panel ${firstInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !firstInvis) { setFirstInvis(true); setCanReveal(false); }}}/>
-                <div className={`second-panel ${secondInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !secondInvis) { setSecondInvis(true); setCanReveal(false); }}}/>
-                <div className={`third-panel ${thirdInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !thirdInvis) { setThirdInvis(true); setCanReveal(false); }}}/>
-                <div className={`fourth-panel ${fourthInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !fourthInvis) { setFourthInvis(true); setCanReveal(false); }}}/>
-                <div className={`fifth-panel ${fifthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !fifthInvis) { setFifthInvis(true); setCanReveal(false); }}}/>
-                <div className={`sixth-panel ${sixthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !sixthInvis) { setSixthInvis(true); setCanReveal(false); }}}/>
-                <div className={`seventh-panel ${seventhInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !seventhInvis) { setSeventhInvis(true); setCanReveal(false); }}}/>
-                <div className={`eighth-panel ${eighthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !eighthInvis) { setEightInvis(true); setCanReveal(false); }}}/>
-                <div className={`ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !ninthInvis) { setNinthInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel light first-panel ${firstInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !firstInvis) { setFirstInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel dark second-panel ${secondInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !secondInvis) { setSecondInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel light third-panel ${thirdInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !thirdInvis) { setThirdInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel dark fourth-panel ${fourthInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !fourthInvis) { setFourthInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel light fifth-panel ${fifthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !fifthInvis) { setFifthInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel dark sixth-panel ${sixthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !sixthInvis) { setSixthInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel light seventh-panel ${seventhInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !seventhInvis) { setSeventhInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel dark eighth-panel ${eighthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !eighthInvis) { setEightInvis(true); setCanReveal(false); }}}/>
+                <div className={`panel light ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !ninthInvis) { setNinthInvis(true); setCanReveal(false); }}}/>
               </>}
           </div>
         </div>
-        <input value={guess} type="text" className="country" disabled={correct || canReveal} onChange={(e) => setGuess(e.target.value)}/>
+        <input value={guess} type="text" className="country" onChange={(e) => setGuess(e.target.value)}/>
         <button className={`submit ${canReveal && !correct ? "disabled": ""}`} disabled={canReveal && !correct} onClick={() => {
 
           if(correct) {
@@ -95,7 +94,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
           <div>The answer was {rightAnswer}!</div> : null
         }
         </div>
-    </>
+    </div>
   );
 }
 

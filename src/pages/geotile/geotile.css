@@ -1,8 +1,6 @@
 .flag {
-    top: 0;
-    margin-top: 0px;
-    margin-left: -180px;
     position: absolute;
     width: 360px;
     height: 270px;
+    border-radius: 8px;
   }

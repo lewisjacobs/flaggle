@@ -1,0 +1,12 @@
+.header {
+  font-size: 24px;
+  height: 50px;
+  width: 100%;
+  border-bottom: 2px solid #474747;
+  text-align: center;
+}
+
+.title {
+  margin-top: 8px;
+  font-size: 24px;
+}
