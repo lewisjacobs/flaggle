@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './geotile.css';
+import './geotile.scss';
 import Grid from '../../components/grid/Grid';
 import { Answers } from './answers';
 import Header from '../../components/header/Header';

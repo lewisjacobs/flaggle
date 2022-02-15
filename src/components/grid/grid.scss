@@ -17,6 +17,7 @@
   width: 300px;
   height: 225px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .country {
@@ -24,10 +25,16 @@
   outline: none;
   font-size: 18px;
   font-weight: 500;
-  width: 240px;
+  width: 300px;
   border-radius: 8px;
   border: 2px solid #e9cfa6;
 }
+
+.inner-country {
+  outline: none;
+  border: none;
+}
+
 .green {
   background-color: green;
 }
@@ -38,22 +45,45 @@
   background-color: #e9cfa6;
   font-size: 18px;
   border-radius: 8px;
-  padding: 8px;
-  width: 220px;
+  padding: 10px;
+  width: 300px;
   outline: none;
   border: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .disabled {
-  opacity: 0.5;
   cursor: default;
 }
 
 .guesses {
-  margin-top: 10px;
+  margin-top: 25px;
   font-size: 18px;
   text-align: center;
+}
+
+.guess-wrapper {
+  display: flex;
+  width: 300px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  &.filled {
+    background-color: #f0dfc4;
+  }
+
+  .guess-icon {
+    width: 50px;
+
+    &.filled {
+      background-color: #f0dfc4;
+    }
+  }
+
+  .guess-text {
+    width: 250px;
+  }
 }
 
 .panel {
@@ -71,7 +101,7 @@
 }
 
 .dark {
-  background-color: #474747;
+  background-color: #4A4A4A;
 }
 
 .first-panel {

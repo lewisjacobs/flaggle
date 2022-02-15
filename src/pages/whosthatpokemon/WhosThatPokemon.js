@@ -1,5 +1,5 @@
 import React from 'react';
-import './whosthatpokemon.css';
+import './whosthatpokemon.scss';
 import Grid from '../components/Grid';
 
 function WhosThatPokemon() {

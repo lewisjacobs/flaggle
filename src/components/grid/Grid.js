@@ -1,6 +1,21 @@
 import { Autocomplete, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import './grid.css';
+import './grid.scss';
+import { styled } from "@mui/material/styles";
+  
+const StyledAutocomplete = styled(Autocomplete)({
+  "& .MuiAutocomplete-inputRoot": {
+    "& .MuiOutlinedInput-notchedOutline": {
+      border: "none"
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      border: "none"
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      border: "none"
+    }
+  }
+});
 
 function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy, answers }) {
 
@@ -14,11 +29,12 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
   const [eighthInvis, setEightInvis] = useState(false);
   const [ninthInvis, setNinthInvis] = useState(false);
 
-  const [guess, setGuess] = useState("");
+  const [guess, setGuess] = useState(null);
   const [correct, setCorrect] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [canReveal, setCanReveal] = useState(true);
   const [total, setTotal] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   const max = easy ? 4 : 9;
 
@@ -26,6 +42,40 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
       `${title} #${dayNumber} ${total}/${max}\r\n` +
       `${ correct ? "❌".repeat(total-1) + "✅" : "❌".repeat(total) }${"⬛".repeat(max-total)}\r\n` +
       `${gameUrl}`;
+
+  const handleGuess = () => {
+
+    if(correct || gameOver) {
+      navigator.clipboard.writeText(shareText);
+    } else if(!canReveal) {
+
+      if(guess === rightAnswer) {
+        setTotal(firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis);
+        setFirstInvis(true);
+        setSecondInvis(true);
+        setThirdInvis(true);
+        setFourthInvis(true);
+        setFifthInvis(true);
+        setSixthInvis(true);
+        setSeventhInvis(true);
+        setEightInvis(true);
+        setNinthInvis(true);
+        setCorrect(true);
+      }
+
+      let newGuesses = guesses;
+      newGuesses.push(guess);
+    
+      setGuesses(newGuesses)
+      setGuess(null)
+      setCanReveal(true)
+
+      console.log(newGuesses.length)
+
+      if(newGuesses.length == max && !correct) setGameOver(true);
+      else setCanReveal(true);
+    }
+  }
 
   return (
       <div className='game'>
@@ -55,55 +105,33 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
               </>}
           </div>
         </div>
-        <Autocomplete
+        <StyledAutocomplete
           className="country"
-          disablePortal
-          id="combo-box-demo"
+          id="country-select"
           options={answers.filter(onlyUnique)}
-          sx={{ width: 300 }}
-          onChange={(e, value) => setGuess(value)}
+          onChange={(e, value) => { setGuess(value ?? "") }}
+          value={guess}
           renderInput={(params) => <TextField {...params} placeholder="Choose a Country" />}
         />
-        <button className={`submit ${canReveal && !correct ? "disabled": ""}`} disabled={canReveal && !correct} onClick={() => {
-
-          console.log(guess.toLowerCase().trim())
-          console.log(rightAnswer.toLowerCase().trim())
-
-          if(correct) {
-            navigator.clipboard.writeText(shareText);
-          } else {
-
-            if(guess.toLowerCase().trim() === rightAnswer.toLowerCase().trim()) {
-              setTotal(firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis);
-              setFirstInvis(true);
-              setSecondInvis(true);
-              setThirdInvis(true);
-              setFourthInvis(true);
-              setFifthInvis(true);
-              setSixthInvis(true);
-              setSeventhInvis(true);
-              setEightInvis(true);
-              setNinthInvis(true);
-              setCorrect(true);
-            }
-
-            let newGuesses = guesses;
-            newGuesses.push(guess);
-          
-            setGuesses(newGuesses)
-            setGuess("")
-            setCanReveal(true)
-          }
-        }}>
-          {correct ? "Share" : guess === "" ? "Skip guess" : "Submit"}
+        <button className="submit" onClick={() => handleGuess()}>
+          {correct || gameOver ? "Share" : guess === null ? "Skip guess" : "Submit"}
         </button>
         <div className='guesses'>
         {
-          guesses.map(g => <div key={g}>{g} {g.toLowerCase().trim() === rightAnswer.toLowerCase().trim() ? "✅" : "❌"}</div>)
+          guesses.map((g, index) => 
+            <div className={`guess-wrapper ${(index % 2 == 0) ? "filled" : ""}`} key={g}>
+              <div className={`guess-icon ${(index % 2 == 0) ? "filled" : ""}`}>{g === rightAnswer ? "✅" : "❌"}</div>
+              <div className="guess-text">{g}</div>
+            </div>
+          )
         }
         {
-          ((firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis) === max) && canReveal && !correct?
-          <div>The answer was {rightAnswer}!</div> : null
+          gameOver ?
+          <div className="guess-wrapper" key={rightAnswer}>
+              <div className="guess-icon">✅</div>
+              <div className="guess-text">The answer was {rightAnswer}!</div>
+          </div>
+          : null
         }
         </div>
     </div>
