@@ -21,7 +21,6 @@
 
 .country {
   margin-top: 20px;
-  padding: 10px;
   outline: none;
   font-size: 18px;
   font-weight: 500;
@@ -29,7 +28,6 @@
   border-radius: 8px;
   border: 2px solid #e9cfa6;
 }
-
 .green {
   background-color: green;
 }

@@ -1,7 +1,8 @@
+import { Autocomplete, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import './grid.css';
 
-function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy }) {
+function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy, answers }) {
 
   const [firstInvis, setFirstInvis] = useState(false);
   const [secondInvis, setSecondInvis] = useState(false);
@@ -54,14 +55,25 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
               </>}
           </div>
         </div>
-        <input value={guess} type="text" className="country" onChange={(e) => setGuess(e.target.value)}/>
+        <Autocomplete
+          className="country"
+          disablePortal
+          id="combo-box-demo"
+          options={answers.filter(onlyUnique)}
+          sx={{ width: 300 }}
+          onChange={(e, value) => setGuess(value)}
+          renderInput={(params) => <TextField {...params} placeholder="Choose a Country" />}
+        />
         <button className={`submit ${canReveal && !correct ? "disabled": ""}`} disabled={canReveal && !correct} onClick={() => {
+
+          console.log(guess.toLowerCase().trim())
+          console.log(rightAnswer.toLowerCase().trim())
 
           if(correct) {
             navigator.clipboard.writeText(shareText);
           } else {
 
-            if(guess.toLowerCase().trim() === rightAnswer) {
+            if(guess.toLowerCase().trim() === rightAnswer.toLowerCase().trim()) {
               setTotal(firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis);
               setFirstInvis(true);
               setSecondInvis(true);
@@ -87,7 +99,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
         </button>
         <div className='guesses'>
         {
-          guesses.map(g => <div key={g}>{g} {g.toLowerCase() === rightAnswer ? "✅" : "❌"}</div>)
+          guesses.map(g => <div key={g}>{g} {g.toLowerCase().trim() === rightAnswer.toLowerCase().trim() ? "✅" : "❌"}</div>)
         }
         {
           ((firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis) === max) && canReveal && !correct?
@@ -96,6 +108,10 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
         </div>
     </div>
   );
+
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
 }
 
 export default Grid;
