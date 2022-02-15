@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/geogrid/static/css/main.6109e0b3.css",
-    "main.js": "/geogrid/static/js/main.a2b3240a.js",
+    "main.css": "/geogrid/static/css/main.b148d02e.css",
+    "main.js": "/geogrid/static/js/main.2fec299a.js",
     "index.html": "/geogrid/index.html",
-    "main.6109e0b3.css.map": "/geogrid/static/css/main.6109e0b3.css.map",
-    "main.a2b3240a.js.map": "/geogrid/static/js/main.a2b3240a.js.map"
+    "main.b148d02e.css.map": "/geogrid/static/css/main.b148d02e.css.map",
+    "main.2fec299a.js.map": "/geogrid/static/js/main.2fec299a.js.map"
   },
   "entrypoints": [
-    "static/css/main.6109e0b3.css",
-    "static/js/main.a2b3240a.js"
+    "static/css/main.b148d02e.css",
+    "static/js/main.2fec299a.js"
   ]
 }
