@@ -35,6 +35,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
   const [canReveal, setCanReveal] = useState(true);
   const [total, setTotal] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [shareClicked, setShareClicked] = userState(false);
 
   const max = easy ? 4 : 9;
 
@@ -46,6 +47,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
         `${ correct ? "❌".repeat(total-1) + "✅" : "❌".repeat(total) }${"⬛".repeat(max-total)}\r\n` +
         `${gameUrl}`
       );
+      setShareClicked(true);
     } else if(!canReveal) {
 
       if(guess === rightAnswer) {
@@ -137,7 +139,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
           renderInput={(params) => <TextField {...params} placeholder="Choose a Country" />}
         />
         <button className="submit" onClick={() => handleGuess()}>
-          {correct || gameOver ? "Share" : guess === null ? "Skip guess" : "Submit"}
+          {shareClicked ? "Copied to Clipboard!" : correct || gameOver ? "Share" : guess === null ? "Skip guess" : "Submit"}
         </button>
         <div className='guesses'>
         {
