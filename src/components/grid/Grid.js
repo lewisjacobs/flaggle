@@ -41,7 +41,11 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
   const handleGuess = () => {
 
     if(correct || gameOver) {
-      handleSharing();
+      navigator.clipboard.writeText(
+        `${title} #${dayNumber} ${total}/${max}\r\n` +
+        `${ correct ? "❌".repeat(total-1) + "✅" : "❌".repeat(total) }${"⬛".repeat(max-total)}\r\n` +
+        `${gameUrl}`
+      );
     } else if(!canReveal) {
 
       if(guess === rightAnswer) {
