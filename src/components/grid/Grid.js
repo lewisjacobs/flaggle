@@ -35,7 +35,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
   const [canReveal, setCanReveal] = useState(true);
   const [total, setTotal] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [shareClicked, setShareClicked] = userState(false);
+  const [shareClicked, setShareClicked] = useState(false);
 
   const max = easy ? 4 : 9;
 
