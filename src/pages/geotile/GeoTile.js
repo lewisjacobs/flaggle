@@ -3,6 +3,7 @@ import './geotile.scss';
 import Grid from '../../components/grid/Grid';
 import { Answers } from './answers';
 import Header from '../../components/header/Header';
+const json = require('./countries.json')
 
 function GeoTile() {
 
@@ -11,8 +12,6 @@ function GeoTile() {
 
   const getTodaysFlag = async () => {
     console.log("Loading...")
-    
-    let json = await (await fetch("https://flagcdn.com/en/codes.json")).json();
     
     let flags = [];
 
