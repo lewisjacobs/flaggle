@@ -2,6 +2,9 @@ import { Autocomplete, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import './grid.scss';
 import { styled } from "@mui/material/styles";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
   
 const StyledAutocomplete = styled(Autocomplete)({
   "& .MuiAutocomplete-inputRoot": {
@@ -17,90 +20,74 @@ const StyledAutocomplete = styled(Autocomplete)({
   }
 });
 
-function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy, answers }) {
+function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answers }) {
 
-  const [firstInvis, setFirstInvis] = useState(false);
-  const [secondInvis, setSecondInvis] = useState(false);
-  const [thirdInvis, setThirdInvis] = useState(false);
-  const [fourthInvis, setFourthInvis] = useState(false);
-  const [fifthInvis, setFifthInvis] = useState(false);
-  const [sixthInvis, setSixthInvis] = useState(false);
-  const [seventhInvis, setSeventhInvis] = useState(false);
-  const [eighthInvis, setEightInvis] = useState(false);
-  const [ninthInvis, setNinthInvis] = useState(false);
-
-  const [guess, setGuess] = useState(null);
-  const [correct, setCorrect] = useState("");
+  const [tileVisibilities, setTileVisibilities] = useState([true, true, true, true, true, true, true, true, true]);
   const [guesses, setGuesses] = useState([]);
-  const [canReveal, setCanReveal] = useState(true);
-  const [total, setTotal] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
+
+  const [currentGuess, setCurrentGuess] = useState(null);
+  const [gameWon, setGameWon] = useState(false);
+  const [gameLost, setGameLost] = useState(false);
   const [shareClicked, setShareClicked] = useState(false);
 
-  const max = easy ? 4 : 9;
+  const numberOfClickedTiles = () => tileVisibilities.reduce((a, v) => (v === false ? a + 1 : a), 0);
+  const numberOfGuesses = () => guesses.length;
+  const canRevealTile = () => numberOfClickedTiles() === numberOfGuesses();
 
-  const handleGuess = () => {
+  const shareToClipboard = () => {
+    navigator.clipboard.writeText(
+      `${title} #${dayNumber} ${gameWon ? numberOfGuesses() : "X"}/${9}\r\n` +
+      `${ gameWon ? "❌".repeat(numberOfGuesses()-1) + "✅" : "❌".repeat(numberOfGuesses()) }${"⬛".repeat(9-numberOfGuesses())}\r\n` +
+      `${gameUrl}`
+    );
+    setShareClicked(true);
+  }
 
-    if(correct || gameOver) {
-      navigator.clipboard.writeText(
-        `${title} #${dayNumber} ${total}/${max}\r\n` +
-        `${ correct ? "❌".repeat(total-1) + "✅" : "❌".repeat(total) }${"⬛".repeat(max-total)}\r\n` +
-        `${gameUrl}`
-      );
-      setShareClicked(true);
-    } else if(!canReveal) {
+  const handleGameWon = () => {
+    setTileVisibilities([false, false, false, false, false, false, false, false, false]);
+    cookies.set(dayNumber+"visibilities", [true, true, true, true, true, true, true, true, true], { path: '/' })
+    setGameWon(true);
+  }
 
-      if(guess === rightAnswer) {
-        setTotal(firstInvis + secondInvis + thirdInvis + fourthInvis + fifthInvis + sixthInvis + seventhInvis + eighthInvis + ninthInvis);
-        setFirstInvis(true);
-        setSecondInvis(true);
-        setThirdInvis(true);
-        setFourthInvis(true);
-        setFifthInvis(true);
-        setSixthInvis(true);
-        setSeventhInvis(true);
-        setEightInvis(true);
-        setNinthInvis(true);
-        setCorrect(true);
-      }
+  const handleGameLost = () => {
+    setTileVisibilities([false, false, false, false, false, false, false, false, false]);
+    cookies.set(dayNumber+"visibilities", [true, true, true, true, true, true, true, true, true], { path: '/' })
+    setGameLost(true);
+  }
+  
+  const addGuess = () => {
+    guesses.push(currentGuess);
+    setGuesses([...guesses]);
+    setCurrentGuess(null);
+  }
 
-      let newGuesses = guesses;
-      newGuesses.push(guess);
-    
-      setGuesses(newGuesses)
-      setGuess(null)
-      setCanReveal(true)
+  const handleButtonClick = () => {
 
-      console.log(newGuesses.length)
-
-      if(newGuesses.length === max && !correct) setGameOver(true);
-      else setCanReveal(true);
+    if(gameWon || gameLost) shareToClipboard();
+    else if (!canRevealTile()) {
+      
+      addGuess();
+      
+      if(currentGuess === rightAnswer) handleGameWon();
+      else if(guesses.length === 9 && !gameWon) handleGameLost();
     }
   }
 
-  const handleSharing = async () => {
+  const handleTileClick = (index) => {
+    
+    console.log(numberOfClickedTiles());
+    console.log(numberOfGuesses());
 
-    const canonical = document.querySelector("link[rel=canonical]");
-    let url = canonical ? canonical.href : document.location.href;
-    const shareDetails = { url, title: `${title} #${dayNumber} ${total}/${max}`, text: `${ correct ? "❌".repeat(total-1) + "✅" : "❌".repeat(total) }${"⬛".repeat(max-total)}` };
-
-    if (navigator.share) {
-      try {
-        await navigator
-          .share(shareDetails)
-          .then(() =>
-            console.log("Hooray! Your content was shared to tha world")
-          );
-      } catch (error) {
-        console.log(`Oops! I couldn't share to the world because: ${error}`);
-      }
-    } else {
-      // fallback code
-      console.log(
-        "Web share is currently not supported on this browser. Please provide a callback"
-      );
+    if(canRevealTile() && tileVisibilities[index]) { 
+      tileVisibilities[index] = false;
+      setTileVisibilities([...tileVisibilities]);
     }
-  };
+    
+    console.log(numberOfClickedTiles());
+    console.log(numberOfGuesses());
+
+    console.log(tileVisibilities);
+  }
 
   return (
       <div className='game'>
@@ -108,38 +95,27 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
         <div className='grid'>
           {image}
           <div className='panels'>
-            { 
-              easy ? 
-              <>
-                <div className={`panel light big-first-panel ${firstInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !firstInvis) { setFirstInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel dark big-second-panel ${secondInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !secondInvis) { setSecondInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel light big-third-panel ${thirdInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !thirdInvis) { setThirdInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel dark big-fourth-panel ${fourthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !fourthInvis) { setFourthInvis(true); setCanReveal(false); }}}/>
-              </>
-              :
-              <>
-                <div className={`panel light first-panel ${firstInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !firstInvis) { setFirstInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel dark second-panel ${secondInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !secondInvis) { setSecondInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel light third-panel ${thirdInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !thirdInvis) { setThirdInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel dark fourth-panel ${fourthInvis ? "invisible" : ""} ${easy ? "easy" : ""}`} onClick={() => { if(canReveal && !fourthInvis) { setFourthInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel light fifth-panel ${fifthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !fifthInvis) { setFifthInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel dark sixth-panel ${sixthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !sixthInvis) { setSixthInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel light seventh-panel ${seventhInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !seventhInvis) { setSeventhInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel dark eighth-panel ${eighthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !eighthInvis) { setEightInvis(true); setCanReveal(false); }}}/>
-                <div className={`panel light ninth-panel ${ninthInvis ? "invisible" : ""}`} onClick={() => { if(canReveal && !ninthInvis) { setNinthInvis(true); setCanReveal(false); }}}/>
-              </>}
+              <div className={`panel light first-panel ${!tileVisibilities[0] ? "invisible" : ""}`} onClick={() => handleTileClick(0)}/>
+              <div className={`panel dark second-panel ${!tileVisibilities[1] ? "invisible" : ""}`} onClick={() => handleTileClick(1)}/>
+              <div className={`panel light third-panel ${!tileVisibilities[2] ? "invisible" : ""}`} onClick={() => handleTileClick(2)}/>
+              <div className={`panel dark fourth-panel ${!tileVisibilities[3] ? "invisible" : ""}`} onClick={() => handleTileClick(3)}/>
+              <div className={`panel light fifth-panel ${!tileVisibilities[4] ? "invisible" : ""}`} onClick={() => handleTileClick(4)}/>
+              <div className={`panel dark sixth-panel ${!tileVisibilities[5] ? "invisible" : ""}`} onClick={() => handleTileClick(5)}/>
+              <div className={`panel light seventh-panel ${!tileVisibilities[6] ? "invisible" : ""}`} onClick={() => handleTileClick(6)}/>
+              <div className={`panel dark eighth-panel ${!tileVisibilities[7] ? "invisible" : ""}`} onClick={() => handleTileClick(7)}/>
+              <div className={`panel light ninth-panel ${!tileVisibilities[8] ? "invisible" : ""}`} onClick={() => handleTileClick(8)}/>
           </div>
         </div>
         <StyledAutocomplete
           className="country"
           id="country-select"
           options={answers.filter(onlyUnique)}
-          onChange={(e, value) => { setGuess(value ?? "") }}
-          value={guess}
+          onChange={(e, value) => { setCurrentGuess(value ?? "") }}
+          value={currentGuess}
           renderInput={(params) => <TextField {...params} placeholder="Choose a Country" />}
         />
-        <button className="submit" onClick={() => handleGuess()}>
-          {shareClicked ? "Copied to Clipboard!" : correct || gameOver ? "Share" : guess === null ? "Skip guess" : "Submit"}
+        <button className="submit" onClick={() => handleButtonClick()}>
+          {shareClicked ? "Copied to Clipboard!" : gameWon || gameLost ? "Share" : currentGuess === null ? "Skip guess" : "Submit"}
         </button>
         <div className='guesses'>
         {
@@ -151,7 +127,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, easy
           )
         }
         {
-          gameOver ?
+          gameLost ?
           <div className="guess-wrapper" key={rightAnswer}>
               <div className="guess-icon">✅</div>
               <div className="guess-text">The answer was {rightAnswer}!</div>
