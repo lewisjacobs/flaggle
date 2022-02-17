@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.scss';
-import GeoTile from './pages/geotile/GeoTile';
+import Flaggle from './pages/flaggle/Flaggle';
 
 function App() {
 
   return (
     <div className='content'> 
-      <GeoTile/>
+      <Flaggle/>
     </div>
   );
 }

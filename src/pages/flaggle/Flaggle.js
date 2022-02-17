@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './geotile.scss';
+import './flaggle.scss';
 import Grid from '../../components/grid/Grid';
 import { Answers } from './answers';
 import Header from '../../components/header/Header';
 const json = require('./countries.json')
 
-function GeoTile() {
+function Flaggle() {
 
   const gameStart = new Date("2022-02-01");
   const dayNumber = Math.floor((new Date().getTime() - gameStart.getTime()) / (1000 * 3600 * 24)) + 1;
@@ -34,11 +34,11 @@ function GeoTile() {
   return (
     <>
       <Header 
-          title={"GeoTile"}
+          title={"Flaggle"}
           dayNumber={dayNumber}  />
       { flag && 
         <Grid 
-          title={"GeoTile"} 
+          title={"Flaggle"} 
           description={"Click to reveal tiles and guess the flag!"} 
           rightAnswer={flag.country} 
           image={<img src={`https://flagcdn.com/w320/${flag.code}.png`} alt="puzzle" className='flag'></img>} 
@@ -51,4 +51,4 @@ function GeoTile() {
     );
 }
 
-export default GeoTile;
+export default Flaggle;
