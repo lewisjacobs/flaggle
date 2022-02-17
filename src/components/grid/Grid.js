@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './grid.scss';
 import { styled } from "@mui/material/styles";
 import Cookies from 'universal-cookie';
@@ -26,8 +26,6 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answ
   const [guesses, setGuesses] = useState([]);
 
   const [currentGuess, setCurrentGuess] = useState(null);
-  const [gameWon, setGameWon] = useState(false);
-  const [gameLost, setGameLost] = useState(false);
   const [shareClicked, setShareClicked] = useState(false);
 
   const numberOfClickedTiles = () => tileVisibilities.reduce((a, v) => (v === false ? a + 1 : a), 0);
@@ -36,58 +34,61 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answ
 
   const shareToClipboard = () => {
     navigator.clipboard.writeText(
-      `${title} #${dayNumber} ${gameWon ? numberOfGuesses() : "X"}/${9}\r\n` +
-      `${ gameWon ? "❌".repeat(numberOfGuesses()-1) + "✅" : "❌".repeat(numberOfGuesses()) }${"⬛".repeat(9-numberOfGuesses())}\r\n` +
+      `${title} #${dayNumber} ${gameWon() ? numberOfGuesses() : "X"}/${9}\r\n` +
+      `${ gameWon() ? "❌".repeat(numberOfGuesses()-1) + "✅" : "❌".repeat(numberOfGuesses()) }${"⬛".repeat(9-numberOfGuesses())}\r\n` +
       `${gameUrl}`
     );
     setShareClicked(true);
   }
 
-  const handleGameWon = () => {
-    setTileVisibilities([false, false, false, false, false, false, false, false, false]);
-    cookies.set(dayNumber+"visibilities", [true, true, true, true, true, true, true, true, true], { path: '/' })
-    setGameWon(true);
+  const setCookie = (name, object) => {
+    cookies.set(dayNumber+name, object, { path: '/' });
   }
 
-  const handleGameLost = () => {
-    setTileVisibilities([false, false, false, false, false, false, false, false, false]);
-    cookies.set(dayNumber+"visibilities", [true, true, true, true, true, true, true, true, true], { path: '/' })
-    setGameLost(true);
-  }
+  const gameWon = () => guesses.includes(rightAnswer);
+  const gameLost = () => !gameWon() && numberOfGuesses() === 9;
   
   const addGuess = () => {
     guesses.push(currentGuess);
     setGuesses([...guesses]);
+    setCookie("guesses", guesses);
     setCurrentGuess(null);
   }
 
   const handleButtonClick = () => {
 
-    if(gameWon || gameLost) shareToClipboard();
+    if(gameWon() || gameLost()) shareToClipboard();
     else if (!canRevealTile()) {
       
       addGuess();
       
-      if(currentGuess === rightAnswer) handleGameWon();
-      else if(guesses.length === 9 && !gameWon) handleGameLost();
+      if(currentGuess === rightAnswer || guesses.length === 9) {
+        setTileVisibilities([false, false, false, false, false, false, false, false, false]);
+        setCookie("tileVisibilities", [false, false, false, false, false, false, false, false, false]);
+      } 
     }
   }
 
   const handleTileClick = (index) => {
-    
-    console.log(numberOfClickedTiles());
-    console.log(numberOfGuesses());
 
     if(canRevealTile() && tileVisibilities[index]) { 
       tileVisibilities[index] = false;
       setTileVisibilities([...tileVisibilities]);
+      setCookie("tileVisibilities", tileVisibilities);
     }
-    
-    console.log(numberOfClickedTiles());
-    console.log(numberOfGuesses());
-
-    console.log(tileVisibilities);
   }
+  
+  const loadCookies = () => {
+    const savedTileVisibilities = cookies.get(dayNumber+"tileVisibilities");
+    if(savedTileVisibilities) setTileVisibilities(savedTileVisibilities);
+
+    const savedGuesses = cookies.get(dayNumber+"guesses");
+    if(savedGuesses) setGuesses(savedGuesses);
+  }
+
+  useEffect(() => {
+    loadCookies();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
       <div className='game'>
@@ -115,7 +116,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answ
           renderInput={(params) => <TextField {...params} placeholder="Choose a Country" />}
         />
         <button className="submit" onClick={() => handleButtonClick()}>
-          {shareClicked ? "Copied to Clipboard!" : gameWon || gameLost ? "Share" : currentGuess === null ? "Skip guess" : "Submit"}
+          {shareClicked ? "Copied to Clipboard!" : gameWon() || gameLost() ? "Share" : currentGuess === null ? "Skip guess" : "Submit"}
         </button>
         <div className='guesses'>
         {
@@ -127,7 +128,7 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answ
           )
         }
         {
-          gameLost ?
+          gameLost() ?
           <div className="guess-wrapper" key={rightAnswer}>
               <div className="guess-icon">✅</div>
               <div className="guess-text">The answer was {rightAnswer}!</div>
