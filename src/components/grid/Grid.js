@@ -41,10 +41,6 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answ
     setShareClicked(true);
   }
 
-  const setCookie = (name, object) => {
-    cookies.set(dayNumber+name, object, { path: '/' });
-  }
-
   const gameWon = () => guesses.includes(rightAnswer);
   const gameLost = () => !gameWon() && numberOfGuesses() === 9;
   
@@ -76,6 +72,13 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answ
       setTileVisibilities([...tileVisibilities]);
       setCookie("tileVisibilities", tileVisibilities);
     }
+  }
+
+  const setCookie = (name, object) => {
+    const tomorrow = new Date();
+    tomorrow.setUTCHours(0,0,0,0);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    cookies.set(dayNumber+name, object, { path: '/', expires: tomorrow });
   }
   
   const loadCookies = () => {
