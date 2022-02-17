@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/flaggle/static/css/main.b643b806.css",
+    "main.css": "/flaggle/static/css/main.9be1eef9.css",
     "main.js": "/flaggle/static/js/main.0b98b7aa.js",
     "index.html": "/flaggle/index.html",
-    "main.b643b806.css.map": "/flaggle/static/css/main.b643b806.css.map",
+    "main.9be1eef9.css.map": "/flaggle/static/css/main.9be1eef9.css.map",
     "main.0b98b7aa.js.map": "/flaggle/static/js/main.0b98b7aa.js.map"
   },
   "entrypoints": [
-    "static/css/main.b643b806.css",
+    "static/css/main.9be1eef9.css",
     "static/js/main.0b98b7aa.js"
   ]
 }
