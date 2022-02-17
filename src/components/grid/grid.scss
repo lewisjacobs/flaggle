@@ -51,6 +51,10 @@
   border: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 .disabled {

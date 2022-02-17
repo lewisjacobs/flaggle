@@ -118,8 +118,8 @@ function Grid({ title, description, rightAnswer, image, dayNumber, gameUrl, answ
           value={currentGuess}
           renderInput={(params) => <TextField {...params} placeholder="Choose a Country" />}
         />
-        <button className="submit" onClick={() => handleButtonClick()}>
-          {shareClicked ? "Copied to Clipboard!" : gameWon() || gameLost() ? "Share" : currentGuess === null ? "Skip guess" : "Submit"}
+        <button className="submit" disabled={canRevealTile() && (!gameWon() && !gameLost())} onClick={() => handleButtonClick()}>
+          {shareClicked ? "Copied to Clipboard!" : gameWon() || gameLost() ? "Share" : canRevealTile() ? "Click a tile" : currentGuess === null ? "Skip guess" : "Submit"}
         </button>
         <div className='guesses'>
         {
