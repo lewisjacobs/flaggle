@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/geogrid/static/css/main.b643b806.css",
-    "main.js": "/geogrid/static/js/main.0b98b7aa.js",
-    "index.html": "/geogrid/index.html",
-    "main.b643b806.css.map": "/geogrid/static/css/main.b643b806.css.map",
-    "main.0b98b7aa.js.map": "/geogrid/static/js/main.0b98b7aa.js.map"
+    "main.css": "/flaggle/static/css/main.b643b806.css",
+    "main.js": "/flaggle/static/js/main.0b98b7aa.js",
+    "index.html": "/flaggle/index.html",
+    "main.b643b806.css.map": "/flaggle/static/css/main.b643b806.css.map",
+    "main.0b98b7aa.js.map": "/flaggle/static/js/main.0b98b7aa.js.map"
   },
   "entrypoints": [
     "static/css/main.b643b806.css",
