@@ -29,12 +29,12 @@ function Flaggle() {
 
   useEffect(() => {
     getTodaysFlag()
-  }, [])
+  }, []) // eslint-disable-line
 
   return (
     <>
       <Header 
-          title={"Flaggle"}
+          title={"FLAGGLE"}
           dayNumber={dayNumber}  />
       { flag && 
         <Grid 
@@ -43,7 +43,7 @@ function Flaggle() {
           rightAnswer={flag.country} 
           image={<img src={`https://flagcdn.com/w320/${flag.code}.png`} alt="puzzle" className='flag'></img>} 
           dayNumber={dayNumber} 
-          gameUrl={"https://lewisjacobs.github.io/geogrid"} 
+          gameUrl={"https://lewisjacobs.github.io/flaggle"} 
           answers={flags.map(m => m.country).sort()}
         /> 
       }
