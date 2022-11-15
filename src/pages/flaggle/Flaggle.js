@@ -8,7 +8,7 @@ const json = require('./countries.json')
 function Flaggle() {
 
   const gameStart = new Date("2022-02-01");
-  const dayNumber = Math.floor((new Date().getTime() - gameStart.getTime()) / (1000 * 3600 * 24)) + 1;
+  const dayNumber = Math.floor((new Date().getTime() - gameStart.getTime()) / (1000 * 3600 * 24)) + 1; 
 
   const getTodaysFlag = async () => {
     console.log("Loading...")
@@ -21,7 +21,7 @@ function Flaggle() {
     }
 
     setFlags(flags);
-    setFlag(flags[Answers[dayNumber - 1]])
+    setFlag(flags[Answers[dayNumber - 1 - 287]]) // -288 to go back to the start of the countries
   }
       
   const [flags, setFlags] = useState([]);
